@@ -1,0 +1,9 @@
+FROM ubuntu
+ ADD restaurant.json /
+ ADD script.sh /
+ RUN apt-get update && apt-get install -y netcat mongodb
+ RUN mkdir /data
+ RUN mkdir /data/db
+ RUN sh script.sh
+ EXPOSE 27017
+
