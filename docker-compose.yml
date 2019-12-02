@@ -5,6 +5,11 @@ services:
     ports:
       - "8080:8080"
   mongodb:
-    build: data
+    image: mongo
     ports:
       - "27017:27017"
+  mongo-init:
+    image: mongo
+    command: bash -c "mongoimport --host mongodb --db intelygenz --collection restaurant --type json --file /init.json"
+    volumes:
+      - ./data/restaurant.json:/init.json
