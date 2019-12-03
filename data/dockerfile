@@ -1,9 +1,6 @@
-FROM ubuntu
- ADD restaurant.json /
- ADD script.sh /
- RUN apt-get update && apt-get install -y netcat mongodb
- RUN mkdir -p /data/db
- EXPOSE 27017
- ENTRYPOINT "/script.sh"
+FROM mongo
+ COPY restaurant.json .
+ COPY script.sh .
+ COPY script.sh /docker-entrypoint-initdb.d/
  CMD [ "mongod" ]
 
